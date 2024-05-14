@@ -60,7 +60,7 @@ export class ArticleController {
   }
 
   // [GDA 05/14/2024] Nouveau point d'API pour récupérer les articles par auteur
-  // Définie une nouvelle route utilisant le verbe POST
+  // Définie une nouvelle route utilisant le verbe GET
   // Puis recupre indirectement via le repository les articles associés à l'auteur passé en paramètre
   // Service -> Repo
   @Get('/author/:author')
