@@ -46,4 +46,10 @@ export class ArticleService {
   async deleteArticle(id: number) {
     return await this.articleRepository.delete(id);
   }
+
+  // [GDA 05/14/2024] Récupère les articles associés à l'auteur passé en paramètre
+  async getArticleByAuthor(author: string) {
+    // Utilise une fonction findBy par défaut du repository pour récupère les articles de l'auteur
+    return await this.articleRepository.findBy({ author: author });
+  }
 }

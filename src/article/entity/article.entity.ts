@@ -7,4 +7,12 @@ export class Article {
 
   @Column({ type: 'varchar' })
   title: string;
+
+  // [GDA 05/14/2024] Nouvel attribut de l'entité / nouvelle colonne de la table qui lui sera associé
+  @Column({ type: 'text' })
+  content: string;
+
+  // [GDA 05/14/2024] Nouvel attribut de l'entité / nouvelle colonne de la table qui lui sera associé
+  @Column({ type: 'text' })
+  author: string;
 }

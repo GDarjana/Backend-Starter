@@ -58,4 +58,13 @@ export class ArticleController {
   deleteArticle(@Param('id', ParseIntPipe) id: number) {
     return this.articleService.deleteArticle(id);
   }
+
+  // [GDA 05/14/2024] Nouveau point d'API pour récupérer les articles par auteur
+  // Définie une nouvelle route utilisant le verbe POST
+  // Puis recupre indirectement via le repository les articles associés à l'auteur passé en paramètre
+  // Service -> Repo
+  @Get('/author/:author')
+  getArticleByAuthor(@Param('author') author: string) {
+    return this.articleService.getArticleByAuthor(author);
+  }
 }
