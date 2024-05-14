@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Body,
   Controller,
@@ -8,7 +9,14 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ArticleService } from '../service/article.service';
+// [GDA 05/14/2024] Screaming Architecture import
+import { CreateArticleService } from '../use-case/create-article.service';
+import { DeleteArticleService } from '../use-case/delete-article.service';
+import { GetAllArticlesService } from '../use-case/get-all-articles.service';
+import { GetArticleByAuthorService } from '../use-case/get-article-by-author.service';
+import { GetOneArticleByIdService } from '../use-case/get-one-article-by-id.service';
+import { UpdateArticleService } from '../use-case/update-article.service';
+
 import { ArticleCreateDto } from '../dto/article-create.dto';
 import { ArticleUpdateDto } from '../dto/article-update.dto';
 
@@ -20,13 +28,20 @@ export class ArticleController {
   // injection de dépendance
   // permet d'instancier la classe ArticleService
   // dans la propriété articleService
-  constructor(private readonly articleService: ArticleService) {}
+  constructor(
+    private readonly CreateArticleService: CreateArticleService,
+    private readonly DeleteArticleService: DeleteArticleService,
+    private readonly UpdateArticleService: UpdateArticleService,
+    private readonly GetAllArticlesService: GetAllArticlesService,
+    private readonly GetArticleByAuthorService: GetArticleByAuthorService,
+    private readonly GetOneArticleByIdService: GetOneArticleByIdService,
+  ) {}
 
   // @Get() est un décorateur qui permet de déclarer
   // une route accessible avec la méthode GET
   @Get()
   getAllArticles() {
-    return this.articleService.getAllarticles();
+    return this.GetAllArticlesService.getAllarticles();
   }
 
   // on peut passer en parametre du décorateur
@@ -34,7 +49,7 @@ export class ArticleController {
   // on peut ensuite récupérer sa valeur avec le décorateur @Param
   @Get(':id')
   getOneArticleById(@Param('id', ParseIntPipe) id: number) {
-    return this.articleService.getOneArticleById(id);
+    return this.GetOneArticleByIdService.getOneArticleById(id);
   }
 
   @Post()
@@ -43,7 +58,7 @@ export class ArticleController {
   // on valide les données du body de la requête
   // avec un DTO (Data Transfer Object)
   createArticle(@Body() data: ArticleCreateDto) {
-    return this.articleService.createArticle(data);
+    return this.CreateArticleService.createArticle(data);
   }
 
   @Put(':id')
@@ -51,12 +66,12 @@ export class ArticleController {
     @Param('id', ParseIntPipe) id: number,
     @Body() data: ArticleUpdateDto,
   ) {
-    return this.articleService.updateArticle(id, data);
+    return this.UpdateArticleService.updateArticle(id, data);
   }
 
   @Delete(':id')
   deleteArticle(@Param('id', ParseIntPipe) id: number) {
-    return this.articleService.deleteArticle(id);
+    return this.DeleteArticleService.deleteArticle(id);
   }
 
   // [GDA 05/14/2024] Nouveau point d'API pour récupérer les articles par auteur
@@ -65,6 +80,6 @@ export class ArticleController {
   // Service -> Repo
   @Get('/author/:author')
   getArticleByAuthor(@Param('author') author: string) {
-    return this.articleService.getArticleByAuthor(author);
+    return this.GetArticleByAuthorService.getArticleByAuthor(author);
   }
 }
