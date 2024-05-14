@@ -14,7 +14,7 @@ export class ArticleCreateDto {
   content: string;
 
   // [GDA 05/14/2024] Vérifie qu'il y ait bien un auteur associé
-  // Applique la vérification sur content
+  // Applique la vérification sur author
   @IsNotEmpty({ message: 'L"auteur doit être renseigné' })
   author: string;
 }
