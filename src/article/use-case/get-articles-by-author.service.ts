@@ -14,7 +14,6 @@ export class GetArticlesByAuthorService {
     private readonly articleRepository: Repository<Article>,
   ) {}
 
-  // BPO - 05/14/2024 - Recherche des articles par auteur
   async getArticlesByAuthor(author: string) {
     return await this.articleRepository.findBy({ author: author });
   }
