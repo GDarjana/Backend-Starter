@@ -50,6 +50,7 @@ export class ArticleService {
   // [GDA 05/14/2024] Récupère les articles associés à l'auteur passé en paramètre
   async getArticleByAuthor(author: string) {
     // Utilise une fonction findBy par défaut du repository pour récupère les articles de l'auteur
+    // Le resultat n'étant pas instantané , on utilise le mot clé await pour attendre la fin de la requête et permettre au reste de s'executer
     return await this.articleRepository.findBy({ author: author });
   }
 }
