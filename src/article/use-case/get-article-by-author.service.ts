@@ -2,11 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Article } from '../entity/article.entity';
-import { ArticleCreateDto } from '../dto/article-create.dto';
 
 // [GDA 05/14/2024]
 Injectable();
-export class CreateArticleService {
+export class GetArticleByAuthorService {
   constructor(
     // on "injecte" le repository de l'entité Article
     // dans la propriété articleRepository de la classe ArticleService
@@ -16,12 +15,10 @@ export class CreateArticleService {
     private readonly articleRepository: Repository<Article>,
   ) {}
 
-  async createArticle(data: ArticleCreateDto) {
-    try {
-      return this.articleRepository.save(data);
-    } catch (error) {
-      console.log(error);
-      throw new Error('Error while creating article');
-    }
+  // [GDA 05/14/2024] Récupère les articles associés à l'auteur passé en paramètre
+  async getArticleByAuthor(author: string) {
+    // Utilise une fonction findBy par défaut du repository pour récupère les articles de l'auteur
+    // Le resultat n'étant pas instantané , on utilise le mot clé await pour attendre la fin de la requête et permettre au reste de s'executer
+    return await this.articleRepository.findBy({ author: author });
   }
 }

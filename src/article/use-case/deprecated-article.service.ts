@@ -5,6 +5,9 @@ import { Article } from '../entity/article.entity';
 import { ArticleUpdateDto } from '../dto/article-update.dto';
 import { ArticleCreateDto } from '../dto/article-create.dto';
 
+/**
+ * @deprecated Use the screaming architecture instead
+ */
 Injectable();
 export class ArticleService {
   constructor(

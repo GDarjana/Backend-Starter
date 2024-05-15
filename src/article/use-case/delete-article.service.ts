@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Article } from '../entity/article.entity';
 
+// [GDA 05/14/2024]
 Injectable();
 export class DeleteArticleService {
   constructor(
