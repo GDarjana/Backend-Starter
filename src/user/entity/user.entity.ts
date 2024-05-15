@@ -20,4 +20,7 @@ export class User {
 
   @Column({ type: 'int' })
   age: number;
+
+  @Column({ type: 'varchar' })
+  birthCity: string;
 }

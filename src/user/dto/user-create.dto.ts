@@ -5,7 +5,7 @@ export class UserCreateDto {
   name: string;
 
   @IsNotEmpty({ message: 'Le prénom doit être renseigné' })
-  lasname: string;
+  lastName: string;
 
   @IsEmail({}, { message: 'Le mail doit être une adresse mail valide' })
   mail: string;
@@ -15,4 +15,7 @@ export class UserCreateDto {
 
   @IsNumber({}, { message: "L'âge doit être un nombre" })
   age: number;
+
+  @IsNotEmpty({ message: 'La ville de naissance doit être renseignée' })
+  birthCity: string;
 }

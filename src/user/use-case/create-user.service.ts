@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserCreateDto } from '../dto/user-create.dto';
 import { User } from '../entity/user.entity';
-import { PasswordHasherServiceInterface } from 'src/utils/password-hasher.service.interface';
+import { BCryptPasswordHasherService } from 'src/utils/bcrypt-pasword-hasher.service';
 
 Injectable();
 export class CreateUserService {
@@ -15,7 +15,8 @@ export class CreateUserService {
     // pour pouvoir ensuite utiliser les méthodes du repository
     // dans les méthodes de notre service
     @InjectRepository(User)
-    private readonly passwordHasherService: PasswordHasherServiceInterface,
+    private readonly userRepository: Repository<User>,
+    private readonly passwordHasherService: BCryptPasswordHasherService,
   ) {}
 
   async createUser(data: UserCreateDto) {
@@ -23,8 +24,7 @@ export class CreateUserService {
       data.password = await this.passwordHasherService.hashPassword(
         data.password,
       );
-      // Add in constructor -> private readonly userRepository: Repository<User>,
-      // return this.userRepository.save(data);
+      return this.userRepository.save(data);
     } catch (error) {
       console.log(error);
       throw new Error('Error while creating user');

@@ -3,21 +3,24 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity/user.entity';
 import { UserController } from './controller/user.controller';
 import { CreateUserService } from './use-case/create-user.service';
-import { BCryptPasswordHasher } from 'src/utils/bcrypt-pasword-hasher.service';
-import { PasswordHasherServiceInterface } from 'src/utils/password-hasher.service.interface';
+import { BCryptPasswordHasherService } from 'src/utils/bcrypt-pasword-hasher.service';
+import { GetAllUsersService } from './use-case/get-all-users.service';
+import { GetUserByIdService } from './use-case/get-user-by-id.service';
+import { GetAllUsersByBirthCityService } from './use-case/get-all-users-by-birthCity.service';
+import { UpdateUserService } from './use-case/update-user.service';
+import { UpdateUserPasswordService } from './use-case/update-user-password.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UserController],
   providers: [
-    {
-      provide: CreateUserService,
-      useFactory: (passwordHasherService: PasswordHasherServiceInterface) => {
-        return new CreateUserService(passwordHasherService);
-      },
-      inject: [BCryptPasswordHasher],
-    },
-    BCryptPasswordHasher,
+    CreateUserService,
+    GetAllUsersService,
+    GetUserByIdService,
+    GetAllUsersByBirthCityService,
+    UpdateUserService,
+    UpdateUserPasswordService,
+    BCryptPasswordHasherService,
   ],
 })
 export class UserModule {}
