@@ -14,7 +14,14 @@ export class Order {
       this.items = orderCreateDto.items;
       this.status = 'In progress';
       this.total = 10 * orderCreateDto.items.length;
+      this.paidAt = null;
     }
+  }
+
+  payOrder() {
+    this.status = 'Paid';
+    this.updatedAt = new Date();
+    this.paidAt = new Date();
   }
 
   @PrimaryGeneratedColumn()
@@ -35,4 +42,7 @@ export class Order {
 
   @Column({ type: 'int' })
   total: number;
+
+  @Column({ type: 'date', nullable: true })
+  paidAt: Date;
 }
