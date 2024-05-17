@@ -3,15 +3,15 @@ import { OrderCreateDto } from '../dto/order-create-dto';
 import { OrderUpdateShippingAddressDto } from '../dto/order-update-shipping-address-dto';
 import { OrderUpdateInvoiceAddressDto } from '../dto/order-update-invoice-address-dto';
 
-enum OrderStatus {
-  InCart = 'In Cart',
-  Shipped = 'Shipped',
-  Paid = 'Paid',
-  Invoiced = 'Invoiced',
-}
-
 @Entity()
 export class Order {
+  static OrderStatus = {
+    InCart: 'In Cart',
+    Shipped: 'Shipped',
+    Paid: 'Paid',
+    Invoiced: 'Invoiced',
+  };
+
   constructor(orderCreateDto?: OrderCreateDto) {
     if (orderCreateDto) {
       if (orderCreateDto.items.length > 3) {
@@ -21,7 +21,7 @@ export class Order {
       this.updatedAt = new Date();
       this.customer = orderCreateDto.customer;
       this.items = orderCreateDto.items;
-      this.status = OrderStatus.InCart;
+      this.status = Order.OrderStatus.InCart;
       this.total = 10 * orderCreateDto.items.length;
       this.paidAt = null;
       this.shippingAddress = null;
@@ -49,7 +49,7 @@ export class Order {
       this.invoiceAddressSetAt = new Date();
     }
     this.updatedAt = new Date();
-    this.status = OrderStatus.Shipped;
+    this.status = Order.OrderStatus.Shipped;
   }
 
   updateInvoiceAddress(
@@ -58,7 +58,7 @@ export class Order {
     this.invoiceAddress = OrderUpdateInvoiceAddressDto.invoiceAddress;
     this.invoiceAddressSetAt = new Date();
     this.updatedAt = new Date();
-    this.status = OrderStatus.Invoiced;
+    this.status = Order.OrderStatus.Invoiced;
   }
 
   @PrimaryGeneratedColumn()
