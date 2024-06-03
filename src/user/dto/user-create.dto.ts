@@ -1,6 +1,9 @@
 import { IsEmail, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class UserCreateDto {
+  @IsNotEmpty({ message: 'Le pseudo doit être renseigné' })
+  username: string;
+
   @IsNotEmpty({ message: 'Le nom doit être renseigné' })
   name: string;
 

@@ -7,6 +7,9 @@ export class User {
   id: number;
 
   @Column({ type: 'varchar' })
+  username: string;
+
+  @Column({ type: 'varchar' })
   name: string;
 
   @Column({ type: 'varchar' })

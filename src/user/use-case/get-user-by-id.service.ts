@@ -10,7 +10,11 @@ export class GetUserByIdService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async getOneArticleById(id: number) {
+  async getUserById(id: number) {
     return await this.userRepository.findBy({ id: id });
+  }
+
+  async getUserByUsername(username: string): Promise<User> {
+    return await this.userRepository.findOne({ where: { username: username } });
   }
 }

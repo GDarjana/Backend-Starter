@@ -44,7 +44,7 @@ export class UserController {
 
   @Get(':id')
   getUserById(@Param('id', ParseIntPipe) id: number) {
-    return this.GetUserByIdService.getOneArticleById(id);
+    return this.GetUserByIdService.getUserById(id);
   }
 
   @Get('/birthCity/:birthCity')

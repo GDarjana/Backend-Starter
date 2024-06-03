@@ -1,0 +1,13 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { Body, Controller, Post } from '@nestjs/common';
+import { CreateJWTService } from '../user-case/create-jwt.service';
+
+@Controller('auth')
+export class AuthController {
+  constructor(private authService: CreateJWTService) {}
+
+  @Post('/login')
+  signIn(@Body() signInDto: Record<string, any>) {
+    return this.authService.signIn(signInDto.username, signInDto.password);
+  }
+}
