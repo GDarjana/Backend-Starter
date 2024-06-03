@@ -1,7 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { OrderCreateDto } from '../dto/order-create-dto';
 import { OrderUpdateShippingAddressDto } from '../dto/order-update-shipping-address-dto';
 import { OrderUpdateInvoiceAddressDto } from '../dto/order-update-invoice-address-dto';
+import { OrderItem } from './order-item.entity';
+import { OrderItemCreateDto } from '../dto/order-item-create-dto';
 
 @Entity()
 export class Order {
@@ -20,7 +22,7 @@ export class Order {
       this.createdAt = new Date();
       this.updatedAt = new Date();
       this.customer = orderCreateDto.customer;
-      this.items = orderCreateDto.items;
+      this.createOrderItems(orderCreateDto.items);
       this.status = Order.OrderStatus.InCart;
       this.total = 10 * orderCreateDto.items.length;
       this.paidAt = null;
@@ -30,6 +32,29 @@ export class Order {
       this.shippingMethodSetAt = null;
       this.invoiceAddressSetAt = null;
     }
+  }
+
+  createOrderItemsOld(orderItemCreate: OrderItemCreateDto[]): void {
+    this.items = orderItemCreate.map((item) => new OrderItem(item));
+  }
+
+  createOrderItems(orderItemCreate: OrderItemCreateDto[]): void {
+    this.items = [];
+    orderItemCreate.forEach((item) => {
+      const existingItem = this.getOrderItemWithProduct(item.product);
+      if (existingItem) {
+        existingItem.incrementQuantity();
+      } else {
+        this.items.push(new OrderItem(item));
+      }
+    });
+  }
+
+  private getOrderItemWithProduct(product: string): OrderItem {
+    return this.items.find((item) => {
+      console.log(item.product);
+      return item.product === product;
+    });
   }
 
   payOrder() {
@@ -71,8 +96,8 @@ export class Order {
   @Column({ type: 'varchar' })
   customer: string;
 
-  @Column({ type: 'json' })
-  items: string;
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.order, { cascade: true })
+  items: OrderItem[];
 
   @Column({ type: 'varchar' })
   status: string;
