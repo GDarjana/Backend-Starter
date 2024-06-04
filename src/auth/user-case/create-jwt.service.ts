@@ -1,4 +1,5 @@
 import {
+  Inject,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -7,19 +8,16 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/entity/user.entity';
 import { Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
+import { CompareUserPasswordService } from 'src/utils/compare-user-password.service';
 
 Injectable();
 export class CreateJWTService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly compareUserPasswordService: CompareUserPasswordService,
     private jwtService: JwtService,
   ) {}
-
-  async comparePassword(password: string, hash: string): Promise<boolean> {
-    return bcrypt.compare(password, hash);
-  }
 
   async signIn(
     username: string,
@@ -32,11 +30,13 @@ export class CreateJWTService {
     if (!user) {
       throw new NotFoundException();
     }
-    const match = await this.comparePassword(pass, user.password);
+    const match = await this.compareUserPasswordService.compare(
+      pass,
+      user.password,
+    );
     if (!match) {
       throw new UnauthorizedException();
     }
-
     const payload = { sub: user.id, username: user.username };
     return {
       access_token: await this.jwtService.signAsync(payload),

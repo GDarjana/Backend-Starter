@@ -9,7 +9,7 @@ import { GetUserByIdService } from './use-case/get-user-by-id.service';
 import { GetAllUsersByBirthCityService } from './use-case/get-all-users-by-birthCity.service';
 import { UpdateUserService } from './use-case/update-user.service';
 import { UpdateUserPasswordService } from './use-case/update-user-password.service';
-import { CompareUserPasswordService } from './use-case/compare-user-password.service';
+import { CompareUserPasswordService } from '../utils/compare-user-password.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
