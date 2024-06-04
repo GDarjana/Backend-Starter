@@ -3,12 +3,21 @@
 import { Controller } from '@nestjs/common/decorators/core/controller.decorator';
 import { CreateOrderService } from '../use-case/create-order.service';
 import { UpdateOrderShippingAddressService } from '../use-case/update-order-shipping-address.service';
-import { Body, Param, ParseIntPipe, Patch, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { OrderCreateDto } from '../dto/order-create-dto';
 import { PayOrderService } from '../use-case/pay-order.service';
 import { OrderUpdateShippingAddressDto } from '../dto/order-update-shipping-address-dto';
 import { OrderUpdateInvoiceAddressDto } from '../dto/order-update-invoice-address-dto';
 import { UpdateOrderInvoiceAddressService } from '../use-case/update-order-invoice-address.service';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 
 @Controller('orders')
 export class OrderController {
@@ -18,7 +27,7 @@ export class OrderController {
     private readonly UpdateOrderShippingAddressService: UpdateOrderShippingAddressService,
     private readonly UpdateOrderInvoiceAddressService: UpdateOrderInvoiceAddressService,
   ) {}
-
+  @UseGuards(AuthGuard)
   @Post()
   createOrder(@Body() data: OrderCreateDto) {
     return this.CreateOrderService.createOrder(data);
