@@ -5,6 +5,7 @@ import { CreateOrderService } from '../use-case/create-order.service';
 import { UpdateOrderShippingAddressService } from '../use-case/update-order-shipping-address.service';
 import {
   Body,
+  Delete,
   Param,
   ParseIntPipe,
   Patch,
