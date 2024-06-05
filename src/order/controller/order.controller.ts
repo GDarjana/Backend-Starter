@@ -10,6 +10,7 @@ import {
   Patch,
   Post,
   Put,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { OrderCreateDto } from '../dto/order-create-dto';
@@ -29,8 +30,8 @@ export class OrderController {
   ) {}
   @UseGuards(AuthGuard)
   @Post()
-  createOrder(@Body() data: OrderCreateDto) {
-    return this.CreateOrderService.createOrder(data);
+  createOrder(@Body() data: OrderCreateDto, @Request() req) {
+    return this.CreateOrderService.createOrder(req.user, data);
   }
 
   @Patch(':id/pay-order')

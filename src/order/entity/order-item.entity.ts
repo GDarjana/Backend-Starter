@@ -9,6 +9,9 @@ export class OrderItem {
       this.product = orderItemCreateDto.product;
       this.quantity = orderItemCreateDto.quantity;
       this.price = orderItemCreateDto.price;
+      this.description = orderItemCreateDto.description;
+      this.imageUrl = orderItemCreateDto.imageUrl;
+      this.color = orderItemCreateDto.color;
     }
   }
 
@@ -27,6 +30,15 @@ export class OrderItem {
 
   @Column({ type: 'int' })
   price: number;
+
+  @Column({ type: 'varchar', nullable: true })
+  description: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  imageUrl: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  color: string;
 
   @ManyToOne(() => Order, (order) => order.items)
   order: Order;

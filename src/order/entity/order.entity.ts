@@ -14,14 +14,14 @@ export class Order {
     Invoiced: 'Invoiced',
   };
 
-  constructor(orderCreateDto?: OrderCreateDto) {
+  constructor(customer: string, orderCreateDto?: OrderCreateDto) {
     if (orderCreateDto) {
       if (orderCreateDto.items.length > 3) {
         throw new Error('Wow 3 produits ca fait un peu beaucoup la non');
       }
       this.createdAt = new Date();
       this.updatedAt = new Date();
-      this.customer = orderCreateDto.customer;
+      this.customer = customer;
       this.createOrderItems(orderCreateDto.items);
       this.status = Order.OrderStatus.InCart;
       this.total = 10 * orderCreateDto.items.length;

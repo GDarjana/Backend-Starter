@@ -9,4 +9,13 @@ export class OrderItemCreateDto {
 
   @IsNumber()
   price: number;
+
+  @IsString()
+  description: string;
+
+  @IsString()
+  imageUrl: string;
+
+  @IsString()
+  color: string;
 }

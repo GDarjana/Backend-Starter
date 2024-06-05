@@ -11,9 +11,9 @@ export class CreateOrderService {
     private readonly orderRepository: Repository<Order>,
   ) {}
 
-  async createOrder(data: OrderCreateDto) {
+  async createOrder(user: string, data: OrderCreateDto) {
     try {
-      const order = new Order(data);
+      const order = new Order(user, data);
       return this.orderRepository.save(order);
     } catch (error) {
       console.log(error);
