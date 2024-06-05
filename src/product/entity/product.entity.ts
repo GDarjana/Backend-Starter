@@ -1,0 +1,33 @@
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { ProductCreateDto } from '../dto/product-create-dto';
+
+@Entity()
+export class Product {
+  constructor(productItemCreateDto: ProductCreateDto) {
+    if (productItemCreateDto) {
+      this.title = productItemCreateDto.title;
+      this.price = productItemCreateDto.price;
+      this.description = productItemCreateDto.description;
+      this.imageUrl = productItemCreateDto.imageUrl;
+      this.color = productItemCreateDto.color;
+    }
+  }
+
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ type: 'varchar' })
+  title: string;
+
+  @Column({ type: 'int' })
+  price: number;
+
+  @Column({ type: 'text', nullable: true })
+  description: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  imageUrl: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  color: string;
+}
