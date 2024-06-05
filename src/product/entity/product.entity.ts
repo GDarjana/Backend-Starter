@@ -13,6 +13,10 @@ export class Product {
     }
   }
 
+  makeUnavailable() {
+    this.isAvailable = false;
+  }
+
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -27,6 +31,9 @@ export class Product {
 
   @Column({ type: 'varchar', nullable: true })
   imageUrl: string;
+
+  @Column({ type: 'boolean', default: true })
+  isAvailable: boolean;
 
   @Column({ type: 'varchar', nullable: true })
   color: string;
