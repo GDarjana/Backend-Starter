@@ -18,12 +18,9 @@ export class CreateJWTService {
     private jwtService: JwtService,
   ) {}
 
-  async signIn(
-    username: string,
-    pass: string,
-  ): Promise<{ access_token: string }> {
+  async signIn(mail: string, pass: string): Promise<{ access_token: string }> {
     const user = await this.userRepository.findOne({
-      where: { username: username },
+      where: { mail: mail },
     });
 
     if (!user) {
