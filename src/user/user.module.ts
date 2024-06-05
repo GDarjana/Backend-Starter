@@ -10,6 +10,7 @@ import { GetAllUsersByBirthCityService } from './use-case/get-all-users-by-birth
 import { UpdateUserService } from './use-case/update-user.service';
 import { UpdateUserPasswordService } from './use-case/update-user-password.service';
 import { CompareUserPasswordService } from '../utils/compare-user-password.service';
+import { GetUserByMailService } from './use-case/get-user-by-mail.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -23,6 +24,8 @@ import { CompareUserPasswordService } from '../utils/compare-user-password.servi
     UpdateUserPasswordService,
     BCryptPasswordHasherService,
     CompareUserPasswordService,
+    // GDA
+    GetUserByMailService,
   ],
 })
 export class UserModule {}
