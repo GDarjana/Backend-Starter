@@ -1,11 +1,11 @@
 import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module';
-import { ProductController } from './controller/product.controller';
-import { CreateProductService } from './user-case/create-product.service';
-import { Product } from './entity/product.entity';
+import { ProductController } from '@src/product/controller/product.controller';
+import { CreateProductService } from '@src/product/use-case/create-product.service';
+import { Product } from '@src/product/entity/product.entity';
 import { Module } from '@nestjs/common';
-import { DeleteProductService } from './user-case/delete-product.service';
-import { GetAllProductService } from './user-case/get-all-products.service';
-import { GetProductByIdService } from './user-case/get-product-by-id.service';
+import { DeleteProductService } from '@src/product/use-case/delete-product.service';
+import { GetAllProductService } from '@src/product/use-case/get-all-products.service';
+import { GetProductByIdService } from '@src/product/use-case/get-product-by-id.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Product])],

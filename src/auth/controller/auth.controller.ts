@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Body, Controller, Post } from '@nestjs/common';
-import { CreateJWTService } from '../user-case/create-jwt.service';
+import { CreateJWTService } from '@src/auth/user-case/create-jwt.service';
 
 @Controller('auth')
 export class AuthController {

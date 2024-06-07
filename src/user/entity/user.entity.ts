@@ -1,4 +1,4 @@
-import { Order } from 'src/order/entity/order.entity';
+import { Order } from '@src/order/entity/order.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 // [GDA 05/15/2024] Nouvelle entité / nouvelle table

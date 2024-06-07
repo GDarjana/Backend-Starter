@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Product } from '@src/product/entity/product.entity';
 import { Repository } from 'typeorm';
-import { Product } from '../entity/product.entity';
 
 Injectable();
-export class GetProductByIdService {
+export class GetAllProductService {
   constructor(
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
   ) {}
 
-  async getProductById(id: number) {
-    return await this.productRepository.findOneBy({ id });
+  async getAllProducts() {
+    return await this.productRepository.find();
   }
 }

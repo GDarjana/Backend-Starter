@@ -6,11 +6,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { OrderCreateDto } from '../dto/order-create-dto';
-import { OrderUpdateShippingAddressDto } from '../dto/order-update-shipping-address-dto';
-import { OrderUpdateInvoiceAddressDto } from '../dto/order-update-invoice-address-dto';
-import { OrderItem } from './order-item.entity';
-import { User } from 'src/user/entity/user.entity';
+import { OrderCreateDto } from '@src/order/dto/order-create-dto';
+import { OrderUpdateShippingAddressDto } from '@src/order/dto/order-update-shipping-address-dto';
+import { OrderUpdateInvoiceAddressDto } from '@src/order/dto/order-update-invoice-address-dto';
+import { OrderItem } from '@src/order/entity/order-item.entity';
+import { User } from '@src/user/entity/user.entity';
 
 @Entity()
 export class Order {

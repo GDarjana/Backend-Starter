@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { OrderCreateDto } from '../dto/order-create-dto';
-import { Order } from '../entity/order.entity';
-import { CreateOrderItemService } from './create-order-item.service';
-import { GetUserByIdService } from 'src/user/use-case/get-user-by-id.service';
-import { OrderItem } from '../entity/order-item.entity';
+import { OrderCreateDto } from '@src/order/dto/order-create-dto';
+import { Order } from '@src/order/entity/order.entity';
+import { CreateOrderItemService } from '@src/order/use-case/create-order-item.service';
+import { GetUserByIdService } from '@src/user/use-case/get-user-by-id.service';
+import { OrderItem } from '@src/order/entity/order-item.entity';
 
 Injectable();
 export class CreateOrderService {

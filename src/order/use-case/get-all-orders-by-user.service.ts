@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Order } from '../entity/order.entity';
+import { Order } from '@src/order/entity/order.entity';
 import { Repository } from 'typeorm';
-import { GetUserByIdService } from 'src/user/use-case/get-user-by-id.service';
+import { GetUserByIdService } from '@src/user/use-case/get-user-by-id.service';
 
 Injectable();
 export class GetAllOrdersByUserService {

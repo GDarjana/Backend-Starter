@@ -2,10 +2,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UserCreateDto } from '../dto/user-create.dto';
-import { User } from '../entity/user.entity';
-import { BCryptPasswordHasherService } from 'src/utils/bcrypt-pasword-hasher.service';
-import { GetUserByMailService } from './get-user-by-mail.service';
+import { UserCreateDto } from '@src/user/dto/user-create.dto';
+import { User } from '@src/user/entity/user.entity';
+import { BCryptPasswordHasherService } from '@src/utils/bcrypt-pasword-hasher.service';
+import { GetUserByMailService } from '@src/user/use-case/get-user-by-mail.service';
 
 Injectable();
 export class CreateUserService {

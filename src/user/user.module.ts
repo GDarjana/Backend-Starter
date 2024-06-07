@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './entity/user.entity';
-import { UserController } from './controller/user.controller';
-import { CreateUserService } from './use-case/create-user.service';
-import { BCryptPasswordHasherService } from 'src/utils/bcrypt-pasword-hasher.service';
-import { GetAllUsersService } from './use-case/get-all-users.service';
-import { GetUserByIdService } from './use-case/get-user-by-id.service';
-import { GetAllUsersByBirthCityService } from './use-case/get-all-users-by-birthCity.service';
-import { UpdateUserService } from './use-case/update-user.service';
-import { UpdateUserPasswordService } from './use-case/update-user-password.service';
-import { CompareUserPasswordService } from '../utils/compare-user-password.service';
-import { GetUserByMailService } from './use-case/get-user-by-mail.service';
+import { User } from '@src/user/entity/user.entity';
+import { UserController } from '@src/user/controller/user.controller';
+import { CreateUserService } from '@src/user/use-case/create-user.service';
+import { BCryptPasswordHasherService } from '@src/utils/bcrypt-pasword-hasher.service';
+import { GetAllUsersService } from '@src/user/use-case/get-all-users.service';
+import { GetUserByIdService } from '@src/user/use-case/get-user-by-id.service';
+import { GetAllUsersByBirthCityService } from '@src/user/use-case/get-all-users-by-birthCity.service';
+import { UpdateUserService } from '@src/user/use-case/update-user.service';
+import { UpdateUserPasswordService } from '@src/user/use-case/update-user-password.service';
+import { CompareUserPasswordService } from '@src/utils/compare-user-password.service';
+import { GetUserByMailService } from '@src/user/use-case/get-user-by-mail.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],

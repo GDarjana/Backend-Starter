@@ -15,13 +15,13 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { OrderCreateDto } from '../dto/order-create-dto';
-import { PayOrderService } from '../use-case/pay-order.service';
-import { OrderUpdateShippingAddressDto } from '../dto/order-update-shipping-address-dto';
-import { OrderUpdateInvoiceAddressDto } from '../dto/order-update-invoice-address-dto';
-import { UpdateOrderInvoiceAddressService } from '../use-case/update-order-invoice-address.service';
-import { AuthGuard } from 'src/auth/guards/auth.guard';
-import { GetAllOrdersByUserService } from '../use-case/get-all-orders-by-user.service';
+import { OrderCreateDto } from '@src/order/dto/order-create-dto';
+import { PayOrderService } from '@src/order/use-case/pay-order.service';
+import { OrderUpdateShippingAddressDto } from '@src/order/dto/order-update-shipping-address-dto';
+import { OrderUpdateInvoiceAddressDto } from '@src/order/dto/order-update-invoice-address-dto';
+import { UpdateOrderInvoiceAddressService } from '@src/order/use-case/update-order-invoice-address.service';
+import { AuthGuard } from '@src/auth/guards/auth.guard';
+import { GetAllOrdersByUserService } from '@src/order/use-case/get-all-orders-by-user.service';
 
 @Controller('orders')
 export class OrderController {

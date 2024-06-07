@@ -8,9 +8,9 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { CreateProductService } from '../user-case/create-product.service';
-import { DeleteProductService } from '../user-case/delete-product.service';
-import { GetAllProductService } from '../user-case/get-all-products.service';
+import { CreateProductService } from '@src/product/use-case/create-product.service';
+import { DeleteProductService } from '@src/product/use-case/delete-product.service';
+import { GetAllProductService } from '@src/product/use-case/get-all-products.service';
 
 import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { ProductCreateDto } from '../dto/product-create-dto';

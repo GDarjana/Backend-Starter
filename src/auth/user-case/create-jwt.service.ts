@@ -5,9 +5,9 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/user/entity/user.entity';
+import { User } from '@src/user/entity/user.entity';
 import { Repository } from 'typeorm';
-import { CompareUserPasswordService } from 'src/utils/compare-user-password.service';
+import { CompareUserPasswordService } from '@src/utils/compare-user-password.service';
 
 Injectable();
 export class CreateJWTService {

@@ -5,9 +5,9 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Order } from './order.entity';
-import { OrderItemCreateDto } from '../dto/order-item-create-dto';
-import { Product } from 'src/product/entity/product.entity';
+import { Order } from '@src/order/entity/order.entity';
+import { OrderItemCreateDto } from '@src/order/dto/order-item-create-dto';
+import { Product } from '@src/product/entity/product.entity';
 
 @Entity()
 export class OrderItem {

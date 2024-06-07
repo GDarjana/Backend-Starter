@@ -8,15 +8,15 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateUserService } from '../use-case/create-user.service';
-import { GetAllUsersService } from '../use-case/get-all-users.service';
-import { GetUserByIdService } from '../use-case/get-user-by-id.service';
-import { GetAllUsersByBirthCityService } from '../use-case/get-all-users-by-birthCity.service';
-import { UpdateUserService } from '../use-case/update-user.service';
-import { UpdateUserPasswordService } from '../use-case/update-user-password.service';
-import { UserCreateDto } from '../dto/user-create.dto';
-import { UserUpdateDto } from '../dto/user-update.dto';
-import { UserPasswordUpdateDto } from '../dto/user-password-update.dto';
+import { CreateUserService } from '@src/user/use-case/create-user.service';
+import { GetAllUsersService } from '@src/user/use-case/get-all-users.service';
+import { GetUserByIdService } from '@src/user/use-case/get-user-by-id.service';
+import { GetAllUsersByBirthCityService } from '@src/user/use-case/get-all-users-by-birthCity.service';
+import { UpdateUserService } from '@src/user/use-case/update-user.service';
+import { UpdateUserPasswordService } from '@src/user/use-case/update-user-password.service';
+import { UserCreateDto } from '@src/user/dto/user-create.dto';
+import { UserUpdateDto } from '@src/user/dto/user-update.dto';
+import { UserPasswordUpdateDto } from '@src/user/dto/user-password-update.dto';
 
 @Controller('users')
 export class UserController {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../entity/user.entity';
+import { User } from '@src/user/entity/user.entity';
 
 // [GDA 05/14/2024]
 Injectable();

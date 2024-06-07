@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../entity/user.entity';
-import { UserPasswordUpdateDto } from '../dto/user-password-update.dto';
-import { BCryptPasswordHasherService } from 'src/utils/bcrypt-pasword-hasher.service';
+import { User } from '@src/user/entity/user.entity';
+import { UserPasswordUpdateDto } from '@src/user/dto/user-password-update.dto';
+import { BCryptPasswordHasherService } from '@src/utils/bcrypt-pasword-hasher.service';
 
 Injectable();
 export class UpdateUserPasswordService {

@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { AuthController } from './controller/auth.controller';
 import { CreateJWTService } from './user-case/create-jwt.service';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
+import { jwtConstants } from '@src/auth/constants';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from 'src/user/entity/user.entity';
-import { CompareUserPasswordService } from 'src/utils/compare-user-password.service';
+import { User } from '@src/user/entity/user.entity';
+import { CompareUserPasswordService } from '@src/utils/compare-user-password.service';
 
 @Module({
   imports: [
