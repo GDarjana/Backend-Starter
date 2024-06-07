@@ -20,14 +20,13 @@ export class CreateOrderService {
       const user = await this.getUserByIdService.getUserById(userId);
       const order = new Order(data);
       order.customer = user;
-      data.items.forEach(async (item) => {
+      for (const item of data.items) {
         const orderItem = await this.createOrderItemService.createOrderItem(
           item,
         );
-        //orderItem.order = order; // TO-CHECK
         orderItem.initPrice();
         order.items.push(orderItem);
-      });
+      }
       return this.orderRepository.save(order);
     } catch (error) {
       console.log(error);

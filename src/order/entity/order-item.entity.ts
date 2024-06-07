@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Order } from './order.entity';
 import { OrderItemCreateDto } from '../dto/order-item-create-dto';
 import { Product } from 'src/product/entity/product.entity';
@@ -29,6 +35,7 @@ export class OrderItem {
   price: number;
 
   @ManyToOne(() => Order, (order) => order.items)
+  @JoinColumn({ name: 'orderId' }) // Assurez-vous que c'est le bon nom de colonne
   order: Order;
 
   @ManyToOne(() => Product, (product) => product.orderItems)
