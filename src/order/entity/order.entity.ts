@@ -39,33 +39,6 @@ export class Order {
     }
   }
 
-  //createOrderItemsOld(orderItemCreate: OrderItemCreateDto[]): void {
-  // this.items = orderItemCreate.map((item) => new OrderItem(item));
-  //}
-  /*
-
-  createOrderItems(orderItemCreate: OrderItemCreateDto[]): void {
-    this.items = [];
-    orderItemCreate.forEach((item) => {
-
-      const existingItem = this.getOrderItemWithProductId(item.productId);
-      if (existingItem) {
-        existingItem.incrementQuantity();
-      } else {
-        console.log(`OrderItem creation`);
-        this.items.push(new OrderItem(item));
-      }
-      this.items.push(new OrderItem(item));
-    });
-  }
-  */
-
-  private getOrderItemWithProduct(product: string): OrderItem {
-    return this.items.find((item) => {
-      return item.product.title === product;
-    });
-  }
-
   getOrderItemWithProductId(productId: number): OrderItem {
     return this.items.find((item) => {
       return item.product.id === productId;

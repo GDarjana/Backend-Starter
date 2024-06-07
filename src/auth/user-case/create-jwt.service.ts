@@ -25,7 +25,6 @@ export class CreateJWTService {
     const user = await this.userRepository.findOne({
       where: { mail: mail },
     });
-    console.log(user);
     if (!user) {
       throw new NotFoundException();
     }

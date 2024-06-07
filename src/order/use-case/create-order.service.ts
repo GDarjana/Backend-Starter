@@ -24,7 +24,6 @@ export class CreateOrderService {
       order = await this.orderRepository.findOne({
         where: { customer: { id: userId }, status: Order.OrderStatus.InCart },
       });
-      console.log('order', order);
       if (!order) {
         order = new Order(data);
         order.customer = user;

@@ -18,12 +18,6 @@ export class GetAllOrdersByUserService {
       if (!user) {
         throw new Error('User not found');
       }
-
-      const orders = await this.orderRepository.find({
-        where: { customer: { id: userId } },
-      });
-      console.log(orders);
-
       return await this.orderRepository.find({
         where: { customer: { id: userId } },
       });
