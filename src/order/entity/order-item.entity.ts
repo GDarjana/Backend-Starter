@@ -21,7 +21,12 @@ export class OrderItem {
     this.quantity++;
   }
 
-  initPrice() {
+  addQuantity(quantity: number) {
+    this.quantity += quantity;
+    this.updatePrice();
+  }
+
+  updatePrice() {
     this.price = this.product.price * this.quantity;
   }
 
@@ -35,9 +40,9 @@ export class OrderItem {
   price: number;
 
   @ManyToOne(() => Order, (order) => order.items)
-  @JoinColumn({ name: 'orderId' }) // Assurez-vous que c'est le bon nom de colonne
+  @JoinColumn({ name: 'orderId' })
   order: Order;
 
-  @ManyToOne(() => Product, (product) => product.orderItems)
+  @ManyToOne(() => Product, (product) => product.orderItems, { eager: true })
   product: Product;
 }

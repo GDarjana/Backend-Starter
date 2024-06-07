@@ -5,6 +5,7 @@ import { OrderCreateDto } from '../dto/order-create-dto';
 import { Order } from '../entity/order.entity';
 import { CreateOrderItemService } from './create-order-item.service';
 import { GetUserByIdService } from 'src/user/use-case/get-user-by-id.service';
+import { OrderItem } from '../entity/order-item.entity';
 
 Injectable();
 export class CreateOrderService {
@@ -16,16 +17,25 @@ export class CreateOrderService {
   ) {}
 
   async createOrder(userId: number, data: OrderCreateDto) {
+    let order: Order;
+    let orderItem: OrderItem;
     try {
       const user = await this.getUserByIdService.getUserById(userId);
-      const order = new Order(data);
-      order.customer = user;
-      for (const item of data.items) {
-        const orderItem = await this.createOrderItemService.createOrderItem(
-          item,
-        );
-        orderItem.initPrice();
+      order = await this.orderRepository.findOne({
+        where: { customer: { id: userId }, status: Order.OrderStatus.InCart },
+      });
+      console.log('order', order);
+      if (!order) {
+        order = new Order(data);
+        order.customer = user;
+      }
+      orderItem = order.getOrderItemWithProductId(data.productId);
+      if (!orderItem) {
+        orderItem = await this.createOrderItemService.createOrderItem(data);
+        orderItem.updatePrice();
         order.items.push(orderItem);
+      } else {
+        orderItem.addQuantity(data.quantity);
       }
       return this.orderRepository.save(order);
     } catch (error) {

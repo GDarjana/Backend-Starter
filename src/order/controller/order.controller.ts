@@ -73,4 +73,10 @@ export class OrderController {
   getOrders(@Request() req) {
     return this.GetAllOrdersByUserService.getOrders(req.user['sub']);
   }
+
+  @Patch(':id')
+  @UseGuards(AuthGuard)
+  updateOrderItems(@Param('id', ParseIntPipe) id: number) {
+    return this.PayOrderService.payOrder(id);
+  }
 }

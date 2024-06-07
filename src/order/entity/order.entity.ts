@@ -23,16 +23,13 @@ export class Order {
 
   constructor(orderCreateDto?: OrderCreateDto) {
     if (orderCreateDto) {
-      if (orderCreateDto.items.length > 3) {
-        throw new Error('Wow 3 produits ca fait un peu beaucoup la non');
-      }
       this.createdAt = new Date();
       this.updatedAt = new Date();
       //this.customer = customer;
       this.items = [];
       //this.createOrderItems(orderCreateDto.items);
       this.status = Order.OrderStatus.InCart;
-      this.total = 10 * orderCreateDto.items.length;
+      this.total = 404;
       this.paidAt = null;
       this.shippingAddress = null;
       this.shippingMethod = null;
@@ -69,7 +66,7 @@ export class Order {
     });
   }
 
-  private getOrderItemWithProductId(productId: number): OrderItem {
+  getOrderItemWithProductId(productId: number): OrderItem {
     return this.items.find((item) => {
       return item.product.id === productId;
     });
@@ -115,10 +112,13 @@ export class Order {
   @JoinColumn({ name: 'customerId' })
   customer: User;
 
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.order, { cascade: true })
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.order, {
+    cascade: true,
+    eager: true,
+  })
   items: OrderItem[];
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', default: Order.OrderStatus.InCart })
   status: string;
 
   @Column({ type: 'int' })
