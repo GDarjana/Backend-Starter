@@ -10,8 +10,10 @@ export class PayOrderService {
     private readonly orderRespository: Repository<Order>,
   ) {}
 
-  async payOrder(id: number) {
-    const order = await this.orderRespository.findOneBy({ id });
+  async payOrder(id: number, userId: number) {
+    const order = await this.orderRespository.findOne({
+      where: { customer: { id: userId }, status: Order.OrderStatus.InCart },
+    });
     order.payOrder();
     await this.orderRespository.save(order);
     return order;

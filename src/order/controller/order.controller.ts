@@ -40,8 +40,8 @@ export class OrderController {
 
   @Patch(':id/pay-order')
   @UseGuards(AuthGuard)
-  payOrder(@Param('id', ParseIntPipe) id: number) {
-    return this.PayOrderService.payOrder(id);
+  payOrder(@Param('id', ParseIntPipe) id: number, @Request() req) {
+    return this.PayOrderService.payOrder(id, req.user['sub']);
   }
 
   @Put(':id/change-shipping-address')
@@ -72,11 +72,5 @@ export class OrderController {
   @UseGuards(AuthGuard)
   getOrders(@Request() req) {
     return this.GetAllOrdersByUserService.getOrders(req.user['sub']);
-  }
-
-  @Patch(':id')
-  @UseGuards(AuthGuard)
-  updateOrderItems(@Param('id', ParseIntPipe) id: number) {
-    return this.PayOrderService.payOrder(id);
   }
 }
