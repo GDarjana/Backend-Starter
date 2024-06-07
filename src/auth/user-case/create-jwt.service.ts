@@ -19,10 +19,13 @@ export class CreateJWTService {
   ) {}
 
   async signIn(mail: string, pass: string): Promise<{ access_token: string }> {
+    if (!mail) {
+      throw new UnauthorizedException();
+    }
     const user = await this.userRepository.findOne({
       where: { mail: mail },
     });
-
+    console.log(user);
     if (!user) {
       throw new NotFoundException();
     }

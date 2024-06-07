@@ -17,7 +17,7 @@ export class CreateUserService {
   ) {}
 
   async createUser(data: UserCreateDto) {
-    const user = await this.GetUserByMailService.getUser(data);
+    const user = await this.GetUserByMailService.getUser(data.mail);
     // Early return if user already exists
     if (user) {
       throw new Error('User already exists');

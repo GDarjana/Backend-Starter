@@ -11,6 +11,7 @@ import { UpdateUserService } from './use-case/update-user.service';
 import { UpdateUserPasswordService } from './use-case/update-user-password.service';
 import { CompareUserPasswordService } from '../utils/compare-user-password.service';
 import { GetUserByMailService } from './use-case/get-user-by-mail.service';
+import { GetUserByUsernameService } from './use-case/get-user-by-username.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -26,6 +27,7 @@ import { GetUserByMailService } from './use-case/get-user-by-mail.service';
     CompareUserPasswordService,
     // GDA
     GetUserByMailService,
+    GetUserByUsernameService,
   ],
 })
 export class UserModule {}

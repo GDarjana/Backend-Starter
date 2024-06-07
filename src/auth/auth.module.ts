@@ -13,7 +13,7 @@ import { CompareUserPasswordService } from 'src/utils/compare-user-password.serv
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '99999999s' },
     }),
   ],
   providers: [CreateJWTService, CompareUserPasswordService],

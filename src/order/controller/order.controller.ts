@@ -6,6 +6,7 @@ import { UpdateOrderShippingAddressService } from '../use-case/update-order-ship
 import {
   Body,
   Delete,
+  Get,
   Param,
   ParseIntPipe,
   Patch,
@@ -20,6 +21,7 @@ import { OrderUpdateShippingAddressDto } from '../dto/order-update-shipping-addr
 import { OrderUpdateInvoiceAddressDto } from '../dto/order-update-invoice-address-dto';
 import { UpdateOrderInvoiceAddressService } from '../use-case/update-order-invoice-address.service';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { GetAllOrdersByUserService } from '../use-case/get-all-orders-by-user.service';
 
 @Controller('orders')
 export class OrderController {
@@ -28,19 +30,22 @@ export class OrderController {
     private readonly PayOrderService: PayOrderService,
     private readonly UpdateOrderShippingAddressService: UpdateOrderShippingAddressService,
     private readonly UpdateOrderInvoiceAddressService: UpdateOrderInvoiceAddressService,
+    private readonly GetAllOrdersByUserService: GetAllOrdersByUserService,
   ) {}
   @UseGuards(AuthGuard)
   @Post()
   createOrder(@Body() data: OrderCreateDto, @Request() req) {
-    return this.CreateOrderService.createOrder(req.user, data);
+    return this.CreateOrderService.createOrder(req.user['sub'], data);
   }
 
   @Patch(':id/pay-order')
+  @UseGuards(AuthGuard)
   payOrder(@Param('id', ParseIntPipe) id: number) {
     return this.PayOrderService.payOrder(id);
   }
 
   @Put(':id/change-shipping-address')
+  @UseGuards(AuthGuard)
   changeShippingAddress(
     @Param('id', ParseIntPipe) id: number,
     @Body() data: OrderUpdateShippingAddressDto,
@@ -52,6 +57,7 @@ export class OrderController {
   }
 
   @Put(':id/change-invoice-address')
+  @UseGuards(AuthGuard)
   changeInvoiceAddress(
     @Param('id', ParseIntPipe) id: number,
     @Body() data: OrderUpdateInvoiceAddressDto,
@@ -60,5 +66,11 @@ export class OrderController {
       id,
       data,
     );
+  }
+
+  @Get()
+  @UseGuards(AuthGuard)
+  getOrders(@Request() req) {
+    return this.GetAllOrdersByUserService.getOrders(req.user['sub']);
   }
 }

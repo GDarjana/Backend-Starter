@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ProductCreateDto } from '../dto/product-create-dto';
+import { OrderItem } from 'src/order/entity/order-item.entity';
 
 @Entity()
 export class Product {
@@ -37,4 +38,9 @@ export class Product {
 
   @Column({ type: 'varchar', nullable: true })
   color: string;
+
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.product, {
+    cascade: true,
+  })
+  orderItems: OrderItem[];
 }

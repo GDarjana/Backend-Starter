@@ -8,9 +8,16 @@ import { UpdateOrderShippingAddressService } from './use-case/update-order-shipp
 import { UpdateOrderInvoiceAddressService } from './use-case/update-order-invoice-address.service';
 import { OrderItem } from './entity/order-item.entity';
 import { CreateOrderItemService } from './use-case/create-order-item.service';
+import { GetProductByIdService } from 'src/product/user-case/get-product-by-id.service';
+import { Product } from 'src/product/entity/product.entity';
+import { GetAllOrdersByUserService } from './use-case/get-all-orders-by-user.service';
+import { GetUserByMailService } from 'src/user/use-case/get-user-by-mail.service';
+import { GetUserByUsernameService } from 'src/user/use-case/get-user-by-username.service';
+import { User } from 'src/user/entity/user.entity';
+import { GetUserByIdService } from 'src/user/use-case/get-user-by-id.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Order, OrderItem])],
+  imports: [TypeOrmModule.forFeature([Order, OrderItem, Product, User])],
   controllers: [OrderController],
   providers: [
     CreateOrderService,
@@ -18,6 +25,12 @@ import { CreateOrderItemService } from './use-case/create-order-item.service';
     UpdateOrderShippingAddressService,
     UpdateOrderInvoiceAddressService,
     CreateOrderItemService,
+    GetProductByIdService,
+    GetAllOrdersByUserService,
+    GetUserByMailService,
+    GetUserByUsernameService,
+    GetAllOrdersByUserService,
+    GetUserByIdService,
   ],
 })
 export class OrderModule {}

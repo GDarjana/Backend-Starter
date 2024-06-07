@@ -65,7 +65,6 @@ export class UserController {
     @Param('id', ParseIntPipe) id: number,
     @Body() data: UserPasswordUpdateDto,
   ) {
-    console.log('data', data);
     return this.UpdateUserPasswordService.updateUserPassword(id, data);
   }
 }

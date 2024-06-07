@@ -1,9 +1,16 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { OrderCreateDto } from '../dto/order-create-dto';
 import { OrderUpdateShippingAddressDto } from '../dto/order-update-shipping-address-dto';
 import { OrderUpdateInvoiceAddressDto } from '../dto/order-update-invoice-address-dto';
 import { OrderItem } from './order-item.entity';
-import { OrderItemCreateDto } from '../dto/order-item-create-dto';
+import { User } from 'src/user/entity/user.entity';
 
 @Entity()
 export class Order {
@@ -14,15 +21,16 @@ export class Order {
     Invoiced: 'Invoiced',
   };
 
-  constructor(customer: string, orderCreateDto?: OrderCreateDto) {
+  constructor(orderCreateDto?: OrderCreateDto) {
     if (orderCreateDto) {
       if (orderCreateDto.items.length > 3) {
         throw new Error('Wow 3 produits ca fait un peu beaucoup la non');
       }
       this.createdAt = new Date();
       this.updatedAt = new Date();
-      this.customer = customer;
-      this.createOrderItems(orderCreateDto.items);
+      //this.customer = customer;
+      this.items = [];
+      //this.createOrderItems(orderCreateDto.items);
       this.status = Order.OrderStatus.InCart;
       this.total = 10 * orderCreateDto.items.length;
       this.paidAt = null;
@@ -34,26 +42,36 @@ export class Order {
     }
   }
 
-  createOrderItemsOld(orderItemCreate: OrderItemCreateDto[]): void {
-    this.items = orderItemCreate.map((item) => new OrderItem(item));
-  }
+  //createOrderItemsOld(orderItemCreate: OrderItemCreateDto[]): void {
+  // this.items = orderItemCreate.map((item) => new OrderItem(item));
+  //}
+  /*
 
   createOrderItems(orderItemCreate: OrderItemCreateDto[]): void {
     this.items = [];
     orderItemCreate.forEach((item) => {
-      const existingItem = this.getOrderItemWithProduct(item.product);
+
+      const existingItem = this.getOrderItemWithProductId(item.productId);
       if (existingItem) {
         existingItem.incrementQuantity();
       } else {
+        console.log(`OrderItem creation`);
         this.items.push(new OrderItem(item));
       }
+      this.items.push(new OrderItem(item));
     });
   }
+  */
 
   private getOrderItemWithProduct(product: string): OrderItem {
     return this.items.find((item) => {
-      console.log(item.product);
-      return item.product === product;
+      return item.product.title === product;
+    });
+  }
+
+  private getOrderItemWithProductId(productId: number): OrderItem {
+    return this.items.find((item) => {
+      return item.product.id === productId;
     });
   }
 
@@ -93,8 +111,9 @@ export class Order {
   createdAt: Date;
   updatedAt: Date;
 
-  @Column({ type: 'varchar' })
-  customer: string;
+  @ManyToOne(() => User, (user) => user.orders)
+  @JoinColumn({ name: 'customerId' })
+  customer: User;
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem.order, { cascade: true })
   items: OrderItem[];

@@ -8,6 +8,7 @@ export class AuthController {
 
   @Post('/login')
   signIn(@Body() signInDto: Record<string, any>) {
+    console.log('signIn', signInDto);
     return this.authService.signIn(signInDto.mail, signInDto.password);
   }
 }

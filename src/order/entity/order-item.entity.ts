@@ -7,9 +7,7 @@ import { Product } from 'src/product/entity/product.entity';
 export class OrderItem {
   constructor(orderItemCreateDto: OrderItemCreateDto) {
     if (orderItemCreateDto) {
-      this.product = orderItemCreateDto.product;
       this.quantity = orderItemCreateDto.quantity;
-      this.price = orderItemCreateDto.price;
     }
   }
 
@@ -17,18 +15,22 @@ export class OrderItem {
     this.quantity++;
   }
 
+  initPrice() {
+    this.price = this.product.price * this.quantity;
+  }
+
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column({ type: 'varchar' })
-  product: string;
 
   @Column({ type: 'int' })
   quantity: number;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', nullable: true })
   price: number;
 
   @ManyToOne(() => Order, (order) => order.items)
   order: Order;
+
+  @ManyToOne(() => Product, (product) => product.orderItems)
+  product: Product;
 }
