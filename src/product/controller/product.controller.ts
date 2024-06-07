@@ -29,6 +29,7 @@ export class ProductController {
     return this.CreateProductService.createProduct(data);
   }
 
+  @UseGuards(AuthGuard)
   @Patch(':id')
   deleteProduct(@Param('id') id: number) {
     return this.DeleteProductService.delete(id);

@@ -12,7 +12,6 @@ import { GetProductByIdService } from 'src/product/user-case/get-product-by-id.s
 import { Product } from 'src/product/entity/product.entity';
 import { GetAllOrdersByUserService } from './use-case/get-all-orders-by-user.service';
 import { GetUserByMailService } from 'src/user/use-case/get-user-by-mail.service';
-import { GetUserByUsernameService } from 'src/user/use-case/get-user-by-username.service';
 import { User } from 'src/user/entity/user.entity';
 import { GetUserByIdService } from 'src/user/use-case/get-user-by-id.service';
 
@@ -28,7 +27,6 @@ import { GetUserByIdService } from 'src/user/use-case/get-user-by-id.service';
     GetProductByIdService,
     GetAllOrdersByUserService,
     GetUserByMailService,
-    GetUserByUsernameService,
     GetAllOrdersByUserService,
     GetUserByIdService,
   ],
